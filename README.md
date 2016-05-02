@@ -18,6 +18,7 @@ Originally developed for DwarfPool http://dwarfpool.com/eth
 * Support monitoring via email
 * Bypass worker_id for detailed statistic and per rig monitoring
 * pass submitHashrate to pool
+* Fast deployment through Docker
 
 #How it works
 ```
@@ -115,6 +116,16 @@ http://sourceforge.net/projects/pywin32/files/pywin32/
 7) Download eth-proxy. Extract eth-proxy.zip. Change settings in config.py and start with command:
 ```
   python xmr-proxy.py
+```
+
+* [Docker]
+Use this generic command line
+```
+docker run -d -v CONFIG:/app/eth-proxy.conf -p PORT:8080 --name eth-proxy fmauneko/eth-proxy
+```
+Exemple:
+```
+docker run -d -v /srv/eth-proxy/eth-proxy.conf:/app/eth-proxy.conf -p 8080:8080 --name eth-proxy fmauneko/eth-proxy
 ```
 
 #Contact
