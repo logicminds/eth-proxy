@@ -1,5 +1,6 @@
 from twisted.internet import defer
 
+
 class Semaphore:
     """A semaphore for event driven systems."""
 
@@ -10,7 +11,7 @@ class Semaphore:
 
     def is_locked(self):
         return (bool)(not self.tokens)
-    
+
     def acquire(self):
         """Attempt to acquire the token.
 

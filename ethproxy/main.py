@@ -6,27 +6,20 @@ import os
 import sys
 import socket
 
-from stratum import settings
-import stratum.logger
-log = stratum.logger.get_logger('proxy')
-
-if __name__ == '__main__':
-    if len(settings.WALLET)!=42 and len(settings.WALLET)!=40:
-        log.error("Wrong WALLET!")
-        sys.exit()
-    settings.CUSTOM_EMAIL = settings.MONITORING_EMAIL if settings.MONITORING_EMAIL and settings.MONITORING else ""
-
-from twisted.internet import reactor, defer, protocol
-from twisted.internet import reactor as reactor2
-from stratum.socket_transport import SocketTransportFactory, SocketTransportClientFactory
-from stratum.services import ServiceEventHandler
+from twisted.internet import reactor, defer
 from twisted.web.server import Site
-from stratum.custom_exceptions import TransportException
 
-from mining_libs import getwork_listener
-from mining_libs import client_service
-from mining_libs import jobs
-from mining_libs import version
+from ethproxy import settings
+from ethproxy import logger
+from ethproxy.mining_libs import getwork_listener
+from ethproxy.mining_libs import client_service
+from ethproxy.mining_libs import jobs
+from ethproxy.stratum.socket_transport import SocketTransportClientFactory
+from ethproxy.stratum.custom_exceptions import TransportException
+
+VERSION = '0.0.5'
+log = logger.get_logger('proxy')
+
 
 def on_shutdown(f):
     '''Clean environment properly'''
@@ -62,7 +55,7 @@ def on_connect(f):
 
     # Get first job and user_id
     debug = "_debug" if settings.DEBUG else ""
-    initial_job = (yield f.rpc('eth_submitLogin', [settings.WALLET, settings.CUSTOM_EMAIL], 'Proxy_'+version.VERSION+debug))
+    initial_job = (yield f.rpc('eth_submitLogin', [settings.WALLET, settings.CUSTOM_EMAIL], 'Proxy_' + VERSION + debug))
 
     reactor.callLater(0, ping, f)
 
@@ -78,7 +71,7 @@ def on_disconnect(f):
 def main():
     reactor.disconnectAll()
 
-    log.warning("Ethereum Stratum proxy version: %s" % version.VERSION)
+    log.warning("Ethereum Stratum proxy version: %s" % VERSION)
 
     # Connect to Stratum pool, main monitoring connection
     log.warning("Trying to connect to Stratum pool at %s:%d" % (settings.POOL_HOST, settings.POOL_PORT))
@@ -166,6 +159,11 @@ def main():
     log.warning("-----------------------------------------------------------------------")
 
 if __name__ == '__main__':
+    if len(settings.WALLET) != 42 and len(settings.WALLET)!=40:
+        log.error("Wrong WALLET!")
+        sys.exit()
+    settings.CUSTOM_EMAIL = settings.MONITORING_EMAIL if settings.MONITORING_EMAIL and settings.MONITORING else ""
+
     fp = file("eth-proxy.pid", 'w')
     fp.write(str(os.getpid()))
     fp.close()

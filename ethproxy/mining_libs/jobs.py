@@ -1,8 +1,9 @@
 from twisted.internet import defer
 
-from stratum import settings
-import stratum.logger
-log = stratum.logger.get_logger('proxy')
+from ethproxy import logger, settings
+
+log = logger.get_logger('proxy')
+
 
 class Job(object):
     def __init__(self):

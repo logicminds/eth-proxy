@@ -1,7 +1,8 @@
 import weakref
-from connection_registry import ConnectionRegistry
-import custom_exceptions
 import hashlib
+
+from ethproxy.stratum.connection_registry import ConnectionRegistry
+from ethproxy.stratum import custom_exceptions
 
 def subscribe(func):
     '''Decorator detect Subscription object in result and subscribe connection'''

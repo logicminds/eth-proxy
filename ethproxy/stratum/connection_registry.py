@@ -1,6 +1,7 @@
 import weakref
 from twisted.internet import reactor
-from services import GenericService
+
+from ethproxy.stratum.services import GenericService
 
 class ConnectionRegistry(object):
     __connections = weakref.WeakKeyDictionary()

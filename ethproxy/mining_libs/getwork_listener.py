@@ -5,8 +5,10 @@ from twisted.internet import defer, threads
 from twisted.web.resource import Resource
 from twisted.web.server import NOT_DONE_YET
 
-import stratum.logger
-log = stratum.logger.get_logger('proxy')
+from ethproxy import logger
+
+log = logger.get_logger('proxy')
+
 
 class Root(Resource):
     isLeaf = True

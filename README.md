@@ -1,10 +1,8 @@
 # Description
 
 This is Stratum Proxy for Ethereum based pools (RPCv2) using asynchronous networking written in Python Twisted.
-Originally developed for DwarfPool http://dwarfpool.com/eth
 
 **NOTE:** This fork is still in development. Some features may be broken. Please report any broken features or issues.
-
 
 # Features
 
@@ -33,25 +31,21 @@ Originally developed for DwarfPool http://dwarfpool.com/eth
                                        +-------------+ Leaserigs
 ```
 
-# ToDo
+# TODO
 
-* ---
-
+* Make command line driver along with parser for wallet, failover servers, etc
+* Create pypi dist
+* Unit test python 2+3, travis ci
+* lint and make python more happy
 
 # Configuration
 
-* all configs in file  eth-proxy.conf
-
+* ethproxy/settings.py contains settings, all of which can be setin via environment variables (and in future
+  by command line arugments)
 
 # Command line to miner start, recommended farm-recheck to use with stratum-proxy is 200
 
 * ./ethminer --farm-recheck 200 -G -F http://127.0.0.1:8080/rig1
-
-
-# External script to restart proxy (made by rain)
-
-* https://paste.ubuntu.com/15327007/
-
 
 # Proxy working check
 
@@ -59,19 +53,13 @@ Originally developed for DwarfPool http://dwarfpool.com/eth
 * If you see "Ethereum stratum proxy" and some infos about connections.
 * If not then mostly case that you have application running on this port, at example Antivirus.
 
-
-# Donations
-
-* ETH:  0xea7263feb7d8a8ab0a11eedd8f1ce04412ab0820
-
-
 # Requirements
 
-eth-proxy is built in python. I have been testing it with 2.7.3, but it should work with other versions. The requirements for running the software are below.
+eth-proxy is built in python. I have been testing it with 2.7.3, but it should work with other versions.
+The requirements for running the software are below.
 
 * Python 2.7+
 * python-twisted
-
 
 # Installation and start
 
@@ -83,7 +71,7 @@ eth-proxy is built in python. I have been testing it with 2.7.3, but it should w
 
 2) start proxy with
 ```
- python ./eth-proxy.py
+ python -m ethproxy.main
 ```
 
 * [Windows]
@@ -119,7 +107,7 @@ http://sourceforge.net/projects/pywin32/files/pywin32/
 ```
 
 * [Docker]
-Use this generic command line
+Use this generic command line (conf references likely need to be updated with package refactor)
 ```
 docker run -d -v CONFIG:/app/eth-proxy.conf -p PORT:8080 --name eth-proxy fmauneko/eth-proxy
 ```
@@ -128,15 +116,12 @@ Exemple:
 docker run -d -v /srv/eth-proxy/eth-proxy.conf:/app/eth-proxy.conf -p 8080:8080 --name eth-proxy fmauneko/eth-proxy
 ```
 
-# Contact
-
-* I am available via admin@dwarfpool.com
-
 # Credits
 
+* Atrides work
 * Original version by Slush0 (original stratum code)
 * More Features added by GeneralFault, Wadee Womersley and Moopless
 
 # License
 
-* This software is provides AS-IS without any warranties of any kind. Please use at your own risk.
+Please see LICENSE for further info

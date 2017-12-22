@@ -1,3 +1,6 @@
 *.pyc
 .python-version
 eth-proxy.pid
+venv
+.env
+log

@@ -1,12 +1,37 @@
-'''
-This is example configuration for Stratum server.
-Please rename it to config.py and fill correct values.
-'''
+import os
+###
+# Examples of command line for miners:
+#
+#   ethminer.exe --farm-recheck 200 -G -F http://HOST:PORT/
+#   ethminer.exe --farm-recheck 300 -G -F http://HOST:PORT/rig1
+#
+#   ethminer.exe -G -F http://127.0.0.1:8080/
+#   ethminer.exe --farm-recheck 100 -G -F http://192.168.0.33:8080/rig1
+#
+#  farm-recheck parameter is very individual. Just test different values.
+#
+#  You can submit shares without workername or
+#  You can provide workername:
+#   - with url like "/rig1"
+#   - or use automatically numbering(integer) based on IP of miner
+#
+#  Servers:
+#    EU-Server:  eth-eu.dwarfpool.com  (France)
+#    US-Server:  eth-us.dwarfpool.com  (EastCoast: Montreal,Canada)
+#    US-Server:  eth-us2.dwarfpool.com (WestCoast: Las Vegas)
+#    RU-Server:  eth-ru.dwarfpool.com  (Moscow)
+#    HK-Server:  eth-hk.dwarfpool.com  (Hong-Kong)
+#    CN-Server:  eth-cn.dwarfpool.com  (Shanghai)
+#    SG-Server:  eth-sg.dwarfpool.com  (Singapore)
+#    AU-Server:  eth-au.dwarfpool.com  (Melbourne)
+#
+# Note: most of these settings are probably useless
+###
 
 # ******************** GENERAL SETTINGS ***************
 
 # Enable some verbose debug (logging requests and responses).
-DEBUG = False
+DEBUG = os.environ.get("DEBUG", False)
 
 # Destination for application logs, files rotated once per day.
 LOGDIR = 'log/'
@@ -39,7 +64,10 @@ THREAD_POOL_SIZE = 30
 # ******************** TRANSPORTS *********************
 
 # Hostname or external IP to expose
-HOSTNAME = 'stratum.example.com'
+HOSTNAME = os.environ.get("HOST", "0.0.0.0")
+PORT = os.environ.get("PORT", 8080)
+HOST = HOSTNAME
+COIN = "ETH"
 
 # Port used for Socket transport. Use 'None' for disabling the transport.
 LISTEN_SOCKET_TRANSPORT = 3333
@@ -135,14 +163,8 @@ PEERS = [
 #   - or use automatically numbering(integer) based on IP of miner
 ###
 
-# Default settings for proxy
-
-# Host and port for your workers
-HOST = "0.0.0.0"
-PORT = 8080
-
 # Coin address where money goes.
-WALLET = 'XXXXXX'
+WALLET = os.environ.get("WALLET", "XXXXXX")
 
 # It's useful for individually monitoring and statistic.
 ENABLE_WORKER_ID = False
@@ -153,14 +175,14 @@ MONITORING = False
 MONITORING_EMAIL = 'mail@example.com'
 
 # Main pool
-POOL_HOST = 'eth-eu.dwarfpool.com'
-POOL_PORT = 8008
+POOL_HOST = os.environ.get("POOL_HOST", "eth-eu.dwarfpool.com")
+POOL_PORT = os.environ.get("POOL_PORT", 8008)
 
 # Failover pool.
-POOL_FAILOVER_ENABLE = False
-POOL_HOST_FAILOVER1 = 'eth-ru.dwarfpool.com'
-POOL_PORT_FAILOVER1 = 8008
-POOL_HOST_FAILOVER2 = 'eth-us.dwarfpool.com'
-POOL_PORT_FAILOVER2 = 8008
-POOL_HOST_FAILOVER3 = 'eth-hk.dwarfpool.com'
-POOL_PORT_FAILOVER3 = 8008
+POOL_FAILOVER_ENABLE = True
+POOL_HOST_FAILOVER1 = os.environ.get("POOL_HOST_FAILOVER1", "eth-ru.dwarfpool.com")
+POOL_PORT_FAILOVER1 = os.environ.get("POOL_PORT_FAILOVER1", 8008)
+POOL_HOST_FAILOVER2 = os.environ.get("POOL_HOST_FAILOVER2", "eth-us.dwarfpool.com")
+POOL_PORT_FAILOVER2 = os.environ.get("POOL_PORT_FAILOVER2", 8008)
+POOL_HOST_FAILOVER3 = os.environ.get("POOL_HOST_FAILOVER3", "eth-hk.dwarfpool.com")
+POOL_PORT_FAILOVER3 = os.environ.get("POOL_PORT_FAILOVER3", 8008)
