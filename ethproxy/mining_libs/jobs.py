@@ -1,3 +1,5 @@
+import logging
+
 from twisted.internet import defer
 
 from ethproxy import logger, settings
@@ -66,7 +68,7 @@ class JobRegistry(object):
             (not self.f.is_connected and not is_main_pool and self.f3 and self.f3.is_connected and is_failover_pool3 and not self.f1.is_connected and not self.f2.is_connected):
             if self.jobs and self.jobs.params and self.jobs.params[0]==newjob.params[0]:
                 return
-            if stratum.logger.settings.DEBUG:
+            if log.level <= logging.DEBUG:
                 log.debug("%s %s" % (log_text, newjob.params))
             else:
                 log.info(log_text)
@@ -75,7 +77,7 @@ class JobRegistry(object):
             on_block = self.on_block
             self.on_block = defer.Deferred()
             on_block.callback(True)
-        elif stratum.logger.settings.DEBUG:
+        else:
             log.debug("%s NOT_USED %s" % (log_text, newjob.params))
 
     def submit(self, method, params, worker_name):

@@ -67,16 +67,7 @@ def on_disconnect(f):
     f.on_disconnect.addCallback(on_disconnect)
 
 @defer.inlineCallbacks
-def start():
-    if len(settings.WALLET) != 42 and len(settings.WALLET) != 40:
-        log.error("Wrong WALLET, please update in settings, use environment variable, or pass via command line.")
-        sys.exit()
-    settings.CUSTOM_EMAIL = settings.MONITORING_EMAIL if settings.MONITORING_EMAIL and settings.MONITORING else ""
-
-    fp = file("eth-proxy.pid", 'w')
-    fp.write(str(os.getpid()))
-    fp.close()
-
+def main():
     reactor.disconnectAll()
 
     log.warning("Ethereum Stratum proxy")
@@ -165,4 +156,15 @@ def start():
         log.warning("Email monitoring disabled")
     log.warning("Failover enabled: %s" % settings.POOL_FAILOVER_ENABLE)
     log.warning("-----------------------------------------------------------------------")
+
+def run():
+    if len(settings.WALLET) != 42 and len(settings.WALLET) != 40:
+        log.error("Wrong WALLET, please update in settings, use environment variable, or pass via command line.")
+        sys.exit()
+    settings.CUSTOM_EMAIL = settings.MONITORING_EMAIL if settings.MONITORING_EMAIL and settings.MONITORING else ""
+
+    fp = file("eth-proxy.pid", 'w')
+    fp.write(str(os.getpid()))
+    fp.close()
+    main()
     reactor.run()

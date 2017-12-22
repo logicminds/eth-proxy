@@ -33,17 +33,14 @@ Features
 How it works
 ============
 
-```
-   Pool A <---+                        +-------------+ Rig1 / PC1
- (Active)      |                       |
-               |                       +-------------+ Rig2 / PC2
-               |                       |
-  Pool B <---+-----StratumProxy  <-----+-------------+ Rig3 / PC3
-(FailOver)                             |
-                                       +-------------+ Rig4 / PC4
-                                       |
-                                       +-------------+ Leaserigs
-```
+Example::
+
+    rig1 ---- rig2 ---- rig3
+                |
+            stratum proxy (ethproxy)
+            |          |
+        Pool A      Pool B
+       (Active)   (Failover)
 
 Configuration
 =============
@@ -70,7 +67,7 @@ Requirements
 
 eth-proxy is built in python. The requirements for running the software are below.
 
-* Python 2.7+
+* Python 2.7+, 3.6+
 * python-twisted
 
 Installation

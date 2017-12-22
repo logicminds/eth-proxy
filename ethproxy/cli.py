@@ -2,7 +2,7 @@
 import argparse
 
 from ethproxy import settings
-from ethproxy.main import start
+from ethproxy.main import run
 
 
 def main():
@@ -33,7 +33,7 @@ def main():
         settings.POOL_HOST_FAILOVER1 = args.pool_host_failover1
     if args.pool_port_failover1:
         settings.POOL_PORT_FAILOVER1 = args.pool_port_failover1
-    start()
+    run()
 
 
 if __name__ == '__main__':
