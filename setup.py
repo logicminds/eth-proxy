@@ -20,7 +20,7 @@ test_requirements = [
 
 setup(
     name='ethproxy',
-    version='1.0.2',
+    version='1.0.3',
     description="Ethereum stratum proxy",
     long_description=readme,
     author="Jon Robison",

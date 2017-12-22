@@ -155,14 +155,14 @@ MONITORING = False
 MONITORING_EMAIL = 'mail@example.com'
 
 # Main pool
-POOL_HOST = os.environ.get("POOL_HOST", "eth-eu.dwarfpool.com")
+POOL_HOST = os.environ.get("POOL_HOST", "eth-us.dwarfpool.com")
 POOL_PORT = os.environ.get("POOL_PORT", 8008)
 
 # Failover pool.
 POOL_FAILOVER_ENABLE = True
-POOL_HOST_FAILOVER1 = os.environ.get("POOL_HOST_FAILOVER1", "eth-ru.dwarfpool.com")
+POOL_HOST_FAILOVER1 = os.environ.get("POOL_HOST_FAILOVER1", "eth-eu.dwarfpool.com")
 POOL_PORT_FAILOVER1 = os.environ.get("POOL_PORT_FAILOVER1", 8008)
-POOL_HOST_FAILOVER2 = os.environ.get("POOL_HOST_FAILOVER2", "eth-us.dwarfpool.com")
+POOL_HOST_FAILOVER2 = os.environ.get("POOL_HOST_FAILOVER2", "eth-ru.dwarfpool.com")
 POOL_PORT_FAILOVER2 = os.environ.get("POOL_PORT_FAILOVER2", 8008)
 POOL_HOST_FAILOVER3 = os.environ.get("POOL_HOST_FAILOVER3", "eth-hk.dwarfpool.com")
 POOL_PORT_FAILOVER3 = os.environ.get("POOL_PORT_FAILOVER3", 8008)
