@@ -3,7 +3,7 @@
 
 from setuptools import setup, find_packages
 
-with open('README.md') as readme_file:
+with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 requirements = [
@@ -35,7 +35,7 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GPL 2 License',
+        'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
         'Natural Language :: English',
         "Programming Language :: Python :: 2",
         'Programming Language :: Python :: 2.7',
