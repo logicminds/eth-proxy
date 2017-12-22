@@ -17,7 +17,6 @@ from ethproxy.mining_libs import jobs
 from ethproxy.stratum.socket_transport import SocketTransportClientFactory
 from ethproxy.stratum.custom_exceptions import TransportException
 
-VERSION = '0.0.5'
 log = logger.get_logger('proxy')
 
 
@@ -55,7 +54,7 @@ def on_connect(f):
 
     # Get first job and user_id
     debug = "_debug" if settings.DEBUG else ""
-    initial_job = (yield f.rpc('eth_submitLogin', [settings.WALLET, settings.CUSTOM_EMAIL], 'Proxy_' + VERSION + debug))
+    initial_job = (yield f.rpc('eth_submitLogin', [settings.WALLET, settings.CUSTOM_EMAIL], 'Proxy_' + debug))
 
     reactor.callLater(0, ping, f)
 
@@ -68,10 +67,19 @@ def on_disconnect(f):
     f.on_disconnect.addCallback(on_disconnect)
 
 @defer.inlineCallbacks
-def main():
+def start():
+    if len(settings.WALLET) != 42 and len(settings.WALLET) != 40:
+        log.error("Wrong WALLET, please update in settings, use environment variable, or pass via command line.")
+        sys.exit()
+    settings.CUSTOM_EMAIL = settings.MONITORING_EMAIL if settings.MONITORING_EMAIL and settings.MONITORING else ""
+
+    fp = file("eth-proxy.pid", 'w')
+    fp.write(str(os.getpid()))
+    fp.close()
+
     reactor.disconnectAll()
 
-    log.warning("Ethereum Stratum proxy version: %s" % VERSION)
+    log.warning("Ethereum Stratum proxy")
 
     # Connect to Stratum pool, main monitoring connection
     log.warning("Trying to connect to Stratum pool at %s:%d" % (settings.POOL_HOST, settings.POOL_PORT))
@@ -157,15 +165,4 @@ def main():
         log.warning("Email monitoring disabled")
     log.warning("Failover enabled: %s" % settings.POOL_FAILOVER_ENABLE)
     log.warning("-----------------------------------------------------------------------")
-
-if __name__ == '__main__':
-    if len(settings.WALLET) != 42 and len(settings.WALLET)!=40:
-        log.error("Wrong WALLET!")
-        sys.exit()
-    settings.CUSTOM_EMAIL = settings.MONITORING_EMAIL if settings.MONITORING_EMAIL and settings.MONITORING else ""
-
-    fp = file("eth-proxy.pid", 'w')
-    fp.write(str(os.getpid()))
-    fp.close()
-    main()
     reactor.run()

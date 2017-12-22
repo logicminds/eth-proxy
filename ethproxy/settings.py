@@ -122,15 +122,6 @@ BROWSER_ENABLE = True
 
 SIGNING_ID = None
 
-# ******************** BITCOIND SETTINGS ************
-
-# Hostname and credentials for one trusted Bitcoin node ("Satoshi's client").
-# Stratum uses both P2P port (which is 8333 everytime) and RPC port
-BITCOIN_TRUSTED_HOST = '127.0.0.1'
-BITCOIN_TRUSTED_PORT = 8332 # RPC port
-BITCOIN_TRUSTED_USER = 'stratum'
-BITCOIN_TRUSTED_PASSWORD = '***somepassword***'
-
 # ******************** OTHER CORE SETTINGS *********************
 # Use "echo -n '<yourpassword>' | sha256sum | cut -f1 -d' ' "
 # for calculating SHA256 of your preferred password
@@ -141,17 +132,6 @@ ADMIN_PASSWORD_SHA256 = None # Admin functionality is disabled
 # Set None to allow admin calls from all IPs
 ADMIN_RESTRICT_INTERFACE = '127.0.0.1'
 
-# *********************** PEER CONFIGURATION *************
-
-# Hardcoded list of Stratum nodes for clients to switch when this node is not available.
-PEERS = [
-    {
-        'hostname': 'stratum.bitcoin.cz',
-        'trusted': True, # This node is trustworthy
-        'weight': -1, # Higher number means higher priority for selection.
-                      # -1 will work mostly as a backup when other servers won't work.
-    },
-]
 ###
 # Command line for miners:
 #   ethminer.exe -G -F http://YOUR_PROXY_IP:8080/

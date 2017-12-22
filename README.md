@@ -33,9 +33,7 @@ This is Stratum Proxy for Ethereum based pools (RPCv2) using asynchronous networ
 
 # TODO
 
-* Make command line driver along with parser for wallet, failover servers, etc
 * Create pypi dist
-* Unit test python 2+3, travis ci
 * lint and make python more happy
 
 # Configuration
@@ -71,7 +69,7 @@ The requirements for running the software are below.
 
 2) start proxy with
 ```
- python -m ethproxy.main
+ python -m ethproxy.cli
 ```
 
 * [Windows]
@@ -80,7 +78,7 @@ https://github.com/Atrides/eth-proxy/releases
 
 Or use python source code
 
-1) Download Python Version 2.7.10 for Windows
+1) Download Python Version 2.7.14 (or greater) for Windows
 https://www.python.org/downloads/
 
 2) Modify PATH variable (how-to http://www.java.com/en/download/help/path.xml) and add
@@ -95,13 +93,13 @@ File Twisted-15.4.0.win32-py2.7.msi (32bit) or Twisted-15.4.0.win-amd64-py2.7.ms
 
 5) Install zope.interface, in console run:
 ```
-   easy_install -U zope.interface
+   pip install -U zope.interface
 ```
 6) Install PyWin32 v2.7
 pywin32-219.win32-py2.7.exe or pywin32-219.win-amd64-py2.7.exe
 http://sourceforge.net/projects/pywin32/files/pywin32/
 
-7) Download eth-proxy. Extract eth-proxy.zip. Change settings in config.py and start with command:
+7) Download eth-proxy. Extract eth-proxy.zip. Change settings and start with command:
 ```
   python xmr-proxy.py
 ```

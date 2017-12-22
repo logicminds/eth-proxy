@@ -1,1 +1,1 @@
-from server import setup
+from ethproxy.stratum.server import setup
