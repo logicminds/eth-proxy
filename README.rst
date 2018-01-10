@@ -5,8 +5,8 @@ ethproxy
 .. image:: https://img.shields.io/pypi/v/ethproxy.svg
         :target: https://pypi.python.org/pypi/ethproxy
 
-.. image:: https://img.shields.io/travis/narfman0/ethproxy.svg
-        :target: https://travis-ci.org/narfman0/ethproxy
+.. image:: https://img.shields.io/travis/narfman0/eth-proxy.svg
+        :target: https://travis-ci.org/narfman0/eth-proxy
 
 Description
 ===========
