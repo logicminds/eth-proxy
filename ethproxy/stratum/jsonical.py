@@ -107,7 +107,7 @@ def tool():
         raise SystemExit("{0} [infile [outfile]]".format(sys.argv[0]))
     try:
         obj = load(infile)
-    except ValueError, e:
+    except ValueError as e:
         raise SystemExit(e)
     dump(obj, outfile)
     outfile.write('\n')

@@ -139,7 +139,7 @@ class Pubsub(object):
             # because it uses weak reference there.
             del session['subscriptions'][key]
         except KeyError:
-            print "Warning: Cannot remove subscription from connection session"
+            print("Warning: Cannot remove subscription from connection session")
             return False
             
         return True

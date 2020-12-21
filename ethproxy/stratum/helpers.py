@@ -87,6 +87,6 @@ def ask_old_server(method, *args):
     try:
         data = ast.literal_eval(res)
     except SyntaxError:
-        print "Data received from server:", res
+        print("Data received from server:", res)
         raise Exception("Corrupted data from old electrum server")
     defer.returnValue(data)

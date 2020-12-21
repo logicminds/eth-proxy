@@ -120,7 +120,7 @@ class HttpSession(Session):
     @classmethod
     def on_expire(cls, sess_obj):
         # FIXME: Close protocol connection
-        print "EXPIRING SESSION", sess_obj
+        print("EXPIRING SESSION", sess_obj)
 
         if sess_obj.protocol:
             sess_obj.protocol.connectionLost(Failure(Exception("HTTP session closed")))
